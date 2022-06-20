@@ -19,6 +19,12 @@ void test_lexer() {
 	}
 }
 
+void test_parse() {
+	Parser::ClassParser parser;
+	parser.calculate();
+}
+
 int main() {
-	test_lexer();
+	//test_lexer();
+	test_parse();
 }

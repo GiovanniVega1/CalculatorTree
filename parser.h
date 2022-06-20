@@ -16,24 +16,29 @@ namespace Parser {
 			expr_list expr ';' //left recursion
 
 		expr:
-			term
-			expr '+' term
-			expr '-' term
+			term (O)
+			expr '+' term (O)
+			expr '-' term (O)
 
 		term:
-			prim
-			term '*' prim
-			term '/' prim
+			prim (O)
+			term '*' prim (O)
+			term '/' prim (O)
 
 		prim:
-			number
-			variable
-			variable '=' expr
-			'-' prim
-			'(' expr ')'
+			number (O)
+			variable (O)
+			variable '=' expr (O)
+			'-' prim (O)
+			'(' expr ')' (O)
 	*/
 
+	using namespace Lexer;
+
 	class ClassParser {
+		private:
+			ClassLexer m_lexer;
+			variable_t m_variable;
 		public:
 			//handle addition and substraction
 			double expr(bool bNextToken);
@@ -44,5 +49,7 @@ namespace Parser {
 			//handle unary minus '-'
 			//handle paranthesis '(' expr ')'
 			double prim(bool bNextToken);
+
+			void calculate();
 	};
 }

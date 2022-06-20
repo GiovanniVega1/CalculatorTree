@@ -3,7 +3,8 @@
 namespace Lexer {
 	//To eat up any blank space
 	std::istream& ClassLexer::get_next_char(char& chr) {
-		while (this->m_stream.get(chr) && std::isblank(chr));
+		while (this->m_stream.get(chr) && 
+			(std::isblank(chr) || chr == '\n'));
 
 		return this->m_stream;
 	}
