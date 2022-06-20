@@ -30,5 +30,6 @@ namespace Lexer {
 			ClassLexer(): m_stream { std::cin} { }
 			Token& get_current_token();
 			Token fetch_next_token();
+			std::istream& get_next_char(char& chr);
 	};
 }

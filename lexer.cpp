@@ -1,7 +1,12 @@
 #include"lexer.h"
 
 namespace Lexer {
-	//Me quede en el minuto 27:40 a punto de crear otra funcion
+	//To eat up any blank space
+	std::istream& ClassLexer::get_next_char(char& chr) {
+		while (this->m_stream.get(chr) && std::isblank(chr));
+
+		return this->m_stream;
+	}
 	Token& ClassLexer::get_current_token() {
 		return this->m_current_token;
 	}
@@ -9,7 +14,7 @@ namespace Lexer {
 		//lac stands for look ahead character
 		char lac = 0;
 		//read in a char from the stream
-		this->m_stream >> lac;
+		this->get_next_char(lac);
 
 		switch (lac) {
 			case 0: //eof or end of file, stream
@@ -51,7 +56,7 @@ namespace Lexer {
 					return this->m_current_token;
 				}
 				else {
-					std::cerr << "Syntax Error" << std::endl;
+					//std::cerr << "Syntax Error" << std::endl;
 					this->m_current_token = { Kind::print };
 					return this->m_current_token;
 				}
